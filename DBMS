@@ -1,0 +1,111 @@
+-- Create Database
+CREATE DATABASE College;
+
+-- Use Database
+USE College;
+
+---------------------------------------------------
+-- Create Student Table
+---------------------------------------------------
+CREATE TABLE student (
+    sid INT PRIMARY KEY,
+    sname VARCHAR(50),
+    smail VARCHAR(100),
+    address VARCHAR(50),
+    age INT
+);
+
+---------------------------------------------------
+-- Create Instructor Table
+---------------------------------------------------
+CREATE TABLE instructor (
+    insid INT PRIMARY KEY,
+    iname VARCHAR(50),
+    department VARCHAR(50),
+    address VARCHAR(50)
+);
+
+---------------------------------------------------
+-- Create Course Table
+---------------------------------------------------
+CREATE TABLE course (
+    cid INT PRIMARY KEY,
+    cname VARCHAR(50),
+    credits INT,
+    insid INT,
+    FOREIGN KEY (insid) REFERENCES instructor(insid)
+);
+
+---------------------------------------------------
+-- Create Enrollment Table
+---------------------------------------------------
+CREATE TABLE enrollment (
+    eid INT PRIMARY KEY,
+    sid INT,
+    cid INT,
+    edate DATE,
+    FOREIGN KEY (sid) REFERENCES student(sid),
+    FOREIGN KEY (cid) REFERENCES course(cid)
+);
+
+---------------------------------------------------
+-- Insert Data into Student Table
+---------------------------------------------------
+INSERT INTO student VALUES
+(1, 'AAkshay', 'akshay@gmail.com', 'Mumbai', 18),
+(2, 'Rahul', 'rahul@gmail.com', 'Pune', 19),
+(3, 'Sneha', 'sneha@gmail.com', 'Nagpur', 19),
+(4, 'Priya', 'priya@gmail.com', 'Delhi', 20),
+(5, 'Amit', 'amit@gmail.com', 'Mumbai', 21),
+(6, 'Neha', 'neha@gmail.com', 'Pune', 18),
+(7, 'Ravi', 'ravi@gmail.com', 'Nashik', 22),
+(8, 'Pooja', 'pooja@gmail.com', 'Nagpur', 19),
+(9, 'Karan', 'karan@gmail.com', 'Aurangabad', 20),
+(10, 'Sonal', 'sonal@gmail.com', 'Mumbai', 21);
+
+---------------------------------------------------
+-- Insert Data into Instructor Table
+---------------------------------------------------
+INSERT INTO instructor VALUES
+(101, 'Dr Sharma', 'Computer', 'Mumbai'),
+(102, 'Dr Mehta', 'IT', 'Pune'),
+(103, 'Dr Joshi', 'Mathematics', 'Nagpur'),
+(104, 'Dr Patil', 'Electronics', 'Pune'),
+(105, 'Dr Kulkarni', 'Computer', 'Mumbai');
+
+---------------------------------------------------
+-- Insert Data into Course Table
+---------------------------------------------------
+INSERT INTO course VALUES
+(201, 'DBMS', 4, 101),
+(202, 'Java', 3, 102),
+(203, 'Data Structures', 4, 101),
+(204, 'Mathematics', 3, 103),
+(205, 'Electronics', 3, 104),
+(206, 'Python', 4, 105),
+(207, 'Operating Systems', 4, 101);
+
+---------------------------------------------------
+-- Insert Data into Enrollment Table
+---------------------------------------------------
+INSERT INTO enrollment VALUES
+(1, 1, 201, '2026-05-11'),
+(2, 2, 202, '2026-05-11'),
+(3, 3, 201, '2026-05-11'),
+(4, 4, 203, '2026-05-11'),
+(5, 5, 206, '2026-05-11'),
+(6, 6, 202, '2026-05-11'),
+(7, 7, 204, '2026-05-11'),
+(8, 8, 205, '2026-05-11'),
+(9, 9, 206, '2026-05-11'),
+(10, 10, 207, '2026-05-11'),
+(11, 1, 203, '2026-05-12'),
+(12, 2, 201, '2026-05-12');
+
+---------------------------------------------------
+-- Verify Tables
+---------------------------------------------------
+SELECT * FROM student;
+SELECT * FROM instructor;
+SELECT * FROM course;
+SELECT * FROM enrollment;
