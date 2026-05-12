@@ -1,0 +1,93 @@
+SELECT *
+FROM student
+WHERE age > 20;
+
+SELECT *
+FROM student
+WHERE address = 'Mumbai';
+
+SELECT c.cname, i.iname
+FROM course c
+JOIN instructor i
+ON c.insid = i.insid
+WHERE i.iname = 'Dr Sharma';
+
+SELECT s.sname, c.cname
+FROM student s
+JOIN enrollment e
+ON s.sid = e.sid
+JOIN course c
+ON e.cid = c.cid
+WHERE c.cname = 'DBMS';
+
+SELECT *
+FROM student
+ORDER BY sname ASC;
+
+SELECT *
+FROM student
+ORDER BY age DESC;
+
+SELECT *
+FROM course
+ORDER BY credits DESC;
+
+SELECT *
+FROM course
+ORDER BY credits DESC;
+
+SELECT c.cname, COUNT(e.sid) AS total_students
+FROM course c
+JOIN enrollment e
+ON c.cid = e.cid
+GROUP BY c.cname;
+
+SELECT address, AVG(age) AS average_age
+FROM student
+GROUP BY address;
+
+SELECT 
+MAX(age) AS maximum_age,
+MIN(age) AS minimum_age
+FROM student;
+
+SELECT sname
+FROM student
+WHERE sid IN (
+    SELECT sid
+    FROM enrollment
+    WHERE cid = (
+        SELECT cid
+        FROM course
+        WHERE cname = 'DBMS'
+    )
+);
+
+SELECT *
+FROM student
+WHERE age > (
+    SELECT AVG(age)
+    FROM student
+);
+
+SELECT iname
+FROM instructor
+WHERE insid = (
+    SELECT insid
+    FROM course
+    WHERE credits = (
+        SELECT MAX(credits)
+        FROM course
+    )
+    LIMIT 1
+);
+
+SELECT *
+FROM student
+WHERE sid NOT IN (
+    SELECT sid
+    FROM enrollment
+);
+
+
+
